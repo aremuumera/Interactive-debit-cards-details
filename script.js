@@ -117,6 +117,7 @@ confirmState.addEventListener('click', (e) => {
         const cvcInput = cvc.value;
         const monthInput = month.value;
         const yearInput = year.value;
+        cvcNumber.innerHTML = cvcInput;
         cardName.innerHTML =  nameInput;
         cardNumber.innerHTML = numberInput;
         cardMonthAndYear.innerHTML = `${monthInput}/${yearInput}`;
