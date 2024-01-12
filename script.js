@@ -12,6 +12,7 @@ const formContainer = document.querySelector('.form-container');
 const cardNumber = document.querySelector('.card-number');
 const cardName = document.querySelector('.card-name');
 const cardMonthAndYear = document.querySelector('.card-month-year');
+const cvcNumber = document.querySelector('.cvc-number');
 
 
 // let btnValidation = inputedNumberValidation () && dobAndCvcValidation ()
@@ -37,22 +38,25 @@ inputedText.addEventListener('input', inputedTextValidation);
 
 // card number input validation
 const inputedNumberValidation = () => {
-    let regex = /^\d{16}$/;
-    let stray = inputedNumber.value;
-    
-    if (!stray.match(regex)) {
-        numberError.innerHTML = "wrong format, numbers only";
-        numberError.style.color = "red";
-        inputedNumber.style.borderColor = "red";
-        return false;
-    } else {
-        inputedNumber.style.borderColor = "hsl(278, 68%, 39%)";
-        numberError.innerHTML = " ";
-        numberError.style.color = " ";
-        return true;
-    }
-};
+   
+        let regex = /^\d{0,16}$/;
+        let stray = inputedNumber.value.replace(/\s/g, ''); // Remove existing spaces and also to remove any space the user has input which will make the numbers togehter
+        let formattedNumber = stray.replace(/(\d{4})/g, '$1 '); // Add space after every 4 digits and then we can add space to the number after every 4 digits
+        inputedNumber.value = formattedNumber.trim(); // Update the input value and the trim method is to remove the last space after the 16th digit
 
+        if (stray.length !== 16) {
+          numberError.innerHTML = "Wrong format, use up to 16 digits";
+          numberError.style.color = "red";
+          inputedNumber.style.borderColor = "red";
+          return false;
+        } else {
+          inputedNumber.style.borderColor = "hsl(278, 68%, 39%)";
+          numberError.innerHTML = "";
+          numberError.style.color = "";
+          return true;
+        }
+    
+    }
 inputedNumber.addEventListener('input', inputedNumberValidation);
 
 // month, date and cvc validation

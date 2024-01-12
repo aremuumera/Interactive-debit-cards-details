@@ -169,6 +169,9 @@ input::placeholder{
     padding: 10px;
     color: hsl(0, 0%, 100%) ;
 }
+.cvc-number{
+    transform: translate(-50%, -50%) ;
+}
 .error{
     color: red;
     padding-top: 8px;
